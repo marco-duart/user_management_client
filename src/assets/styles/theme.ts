@@ -22,6 +22,9 @@ export const theme = {
       black: "#1F2937",
     },
     divider: "#E5E7EB",
+    alert: "#D4A017",
+    success: "#5D8C5A",
+    error: "#A52A2A",
   },
   typography: {
     fontFamily: "'Inter', sans-serif",
