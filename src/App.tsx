@@ -4,17 +4,17 @@ import { Toaster } from "react-hot-toast";
 import { theme } from "./assets/styles/theme";
 import { toastConfig } from "./config/toast-config";
 import Router from "./routes";
-import { UserProvider } from "./context/user-context";
+import { AuthProvider } from "./contexts/auth-context";
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <UserProvider>
+        <AuthProvider>
           <Toaster toastOptions={{ ...toastConfig }} />
           <Router />
-        </UserProvider>
+        </AuthProvider>
       </ThemeProvider>
     </>
   );

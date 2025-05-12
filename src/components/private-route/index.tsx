@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useUserContext } from "../../hooks/use-user-context";
+import { useAuthContext } from "../../hooks/use-auth-context";
 import { useNavigate } from "react-router-dom";
 import { UserDTO } from "../../services/user/DTO";
 import { ReactNode } from "react";
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const PrivateRoute = ({ requiredRole, children }: Props) => {
-  const { user } = useUserContext();
+  const { user } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
