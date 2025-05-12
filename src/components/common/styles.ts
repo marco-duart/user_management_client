@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const BaseLayoutContainer = styled.div`
   display: flex;
@@ -42,30 +43,40 @@ export const Logo = styled.div`
   }
 `;
 
-export const NavLinks = styled.nav`
+export const HeaderLinks = styled.nav`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing(2)};
   flex-wrap: wrap;
 `;
 
-export const NavLink = styled.button<{ disabled?: boolean }>`
-  background: none;
-  border: none;
-  color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.text.secondary : theme.colors.text.primary};
+export const HeaderLink = styled(NavLink)<{ active?: boolean }>`
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  cursor: "pointer";
   padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius.sm};
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: ${({ theme, disabled }) =>
-      !disabled && theme.colors.primary.light};
-    color: ${({ theme, disabled }) =>
-      !disabled && theme.colors.common.white};
+    background-color: ${({ theme }) => theme.colors.primary.light};
+    color: ${({ theme }) => theme.colors.common.white};
   }
+
+  @media ${({ theme }) => theme.mediaQuery.tablet} {
+    font-size: ${({ theme }) => theme.typography.fontSize.base};
+  }
+`;
+
+export const HeaderButton = styled.button`
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  cursor: "pointer";
+  padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
+  border-radius: ${({ theme }) => theme.shape.borderRadius.sm};
+  transition: background-color 0.2s;
 
   @media ${({ theme }) => theme.mediaQuery.tablet} {
     font-size: ${({ theme }) => theme.typography.fontSize.base};
