@@ -8,11 +8,14 @@ import {
   profilePasswordSchema,
 } from "../../schemas/profile-schema";
 import * as S from "./styles";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 type Props = {
   user: {
     name: string;
     email: string;
+    createdAt: string;
   };
   onNameSubmit: (data: ProfileNameFormData) => Promise<void>;
   onPasswordSubmit: (data: ProfilePasswordFormData) => Promise<void>;
@@ -94,6 +97,17 @@ const ProfileForm: React.FC<Props> = ({
                   <S.HelpText>
                     Não é possível alterar o e-mail através deste formulário.
                   </S.HelpText>
+                </S.FormGroup>
+
+                <S.FormGroup>
+                  <S.FormLabel>Data de criação da conta</S.FormLabel>
+                  <S.StaticValue>
+                    {format(
+                      new Date(user.createdAt),
+                      "dd 'de' MMMM 'de' yyyy",
+                      { locale: ptBR }
+                    )}
+                  </S.StaticValue>
                 </S.FormGroup>
               </S.FormGrid>
 

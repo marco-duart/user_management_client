@@ -8,9 +8,11 @@ import {
 import { UserDTO } from "../../services/user/DTO";
 import * as S from "./styles";
 import LoadingSpinner from "../loading-spinner";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm: React.FC = () => {
   const { registerUser, loading, error } = useRegistration();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -21,12 +23,15 @@ const RegisterForm: React.FC = () => {
   });
 
   const onSubmit = async (data: RegisterFormData) => {
-    await registerUser({
+    const success = await registerUser({
       name: data.name,
       email: data.email,
       password: data.password,
       role: UserDTO.Role.USER,
     });
+    if (success) {
+      navigate("/");
+    }
   };
 
   return (

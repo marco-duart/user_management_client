@@ -14,7 +14,7 @@ export const ProfileLayout = styled.div`
     gap: ${({ theme }) => theme.spacing(10)};
   }
 
-  @media ${({ theme }) => theme.mediaQuery.tablet} {
+  @media ${({ theme }) => theme.mediaQuery.desktop} {
     padding: ${({ theme }) => theme.spacing(8)};
     flex-direction: row;
     align-items: flex-start;
