@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@styled-icons/fa-solid": "^10.47.0",
     "@styled-icons/material": "^10.47.0",
+    "@tanstack/react-table": "^8.21.3",
     "axios": "^1.9.0",
     "date-fns": "^4.1.0",
     "qs": "^6.14.0",
