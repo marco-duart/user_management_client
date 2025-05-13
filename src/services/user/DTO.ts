@@ -3,10 +3,15 @@ export namespace UserDTO {
     ADMIN = "admin",
     USER = "user",
   }
+  export enum Status {
+    ACTIVE = "active",
+    INACTIVE = "inactive",
+  }
   export interface Model {
     id: number;
     name: string;
     email: string;
+    status: Status;
     role: Role;
     createdAt: string;
     updatedAt: string;
