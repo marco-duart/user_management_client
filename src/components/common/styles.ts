@@ -53,7 +53,7 @@ export const HeaderLinks = styled.nav`
 export const HeaderLink = styled(NavLink)<{ active?: boolean }>`
   color: ${({ theme }) => theme.colors.text.primary};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  cursor: "pointer";
+  cursor: pointer;
   padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius.sm};
   transition: background-color 0.2s;
@@ -73,10 +73,15 @@ export const HeaderButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.colors.text.primary};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  cursor: "pointer";
+  cursor: pointer;
   padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius.sm};
   transition: background-color 0.2s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primary.light};
+    color: ${({ theme }) => theme.colors.common.white};
+  }
 
   @media ${({ theme }) => theme.mediaQuery.tablet} {
     font-size: ${({ theme }) => theme.typography.fontSize.base};
