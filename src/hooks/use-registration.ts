@@ -17,20 +17,14 @@ export const useRegistration = () => {
       if (!result.success) {
         toast.error(result.message);
         setError(result.message);
-        return result;
+        return result.success;
       }
 
       toast.success(result.message);
-      return result;
+      return result.success;
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Erro desconhecido.";
-      toast.error(message);
-      setError(message);
-      return {
-        success: false,
-        message,
-        code: 500,
-      };
+      toast.error("Erro ao registrar usuário.");
+      return false;
     } finally {
       setLoading(false);
     }
