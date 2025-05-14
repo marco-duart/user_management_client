@@ -2,8 +2,13 @@ import styled from "styled-components";
 
 export const RegisterPageContainer = styled.div`
   width: 100%;
+  height: 100vh;
   max-width: 28rem;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: ${({ theme }) => theme.spacing(4)};
 
   @media ${({ theme }) => theme.mediaQuery.tablet} {
