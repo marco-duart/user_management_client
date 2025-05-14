@@ -9,7 +9,7 @@ import { useAuthContext } from "./use-auth-context";
 import { UserDTO, GetUsersDTO, UpdateUserDTO } from "../services/user/DTO";
 
 export const useUsers = () => {
-  const { token } = useAuthContext();
+  const { token, user } = useAuthContext();
 
   const [users, setUsers] = useState<UserDTO.Model[]>([]);
   const [pagination, setPagination] =
@@ -20,7 +20,7 @@ export const useUsers = () => {
   const fetchUsers = async (
     params?: Omit<GetUsersDTO.Params, "token">
   ): Promise<void> => {
-    if (!token) return;
+    if (!token || user?.role !== UserDTO.Role.ADMIN) return;
 
     setIsLoading(true);
     setError(null);
