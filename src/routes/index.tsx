@@ -13,9 +13,24 @@ const Router: React.FC = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route element={<Baselayout />}>
-          <Route path="/users" element={<PrivateRoute requiredRole={UserDTO.Role.ADMIN}><UsersPage /></PrivateRoute>}></Route>
+        <Route
+          element={
+            <PrivateRoute
+              requiredRole={[UserDTO.Role.USER, UserDTO.Role.ADMIN]}
+            >
+              <Baselayout />
+            </PrivateRoute>
+          }
+        >
           <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/users"
+            element={
+              <PrivateRoute requiredRole={[UserDTO.Role.ADMIN]}>
+                <UsersPage />
+              </PrivateRoute>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
