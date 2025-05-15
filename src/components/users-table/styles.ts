@@ -87,14 +87,11 @@ export const EditButton = styled.button`
   font-size: ${({ theme }) => theme.typography.fontSize.xs};
   cursor: pointer;
   transition: background-color 0.2s;
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  padding: ${({ theme }) => theme.spacing(2)} ${({ theme }) => theme.spacing(3)};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.primary.main};
-  }
-
-  @media ${({ theme }) => theme.mediaQuery.tablet} {
-    font-size: ${({ theme }) => theme.typography.fontSize.sm};
-    padding: ${({ theme }) => theme.spacing(2)} ${({ theme }) => theme.spacing(3)};
   }
 `;
 
@@ -107,14 +104,11 @@ export const DeleteButton = styled.button`
   font-size: ${({ theme }) => theme.typography.fontSize.xs};
   cursor: pointer;
   transition: background-color 0.2s;
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  padding: ${({ theme }) => theme.spacing(2)} ${({ theme }) => theme.spacing(3)};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondary.dark};
-  }
-
-  @media ${({ theme }) => theme.mediaQuery.tablet} {
-    font-size: ${({ theme }) => theme.typography.fontSize.sm};
-    padding: ${({ theme }) => theme.spacing(2)} ${({ theme }) => theme.spacing(3)};
   }
 `;
 
@@ -122,16 +116,12 @@ export const RoleBadge = styled.span<{ $role: string }>`
   display: inline-block;
   padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius.md};
-  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   background-color: ${({ theme, $role }) =>
     $role === "admin" ? theme.colors.primary.light : theme.colors.divider};
   color: ${({ theme, $role }) =>
     $role === "admin" ? theme.colors.common.white : theme.colors.text.primary};
-
-  @media ${({ theme }) => theme.mediaQuery.tablet} {
-    font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  }
 `;
 
 export const PaginationContainer = styled.div`
@@ -187,16 +177,12 @@ export const StatusBadge = styled.span<{ $active: "active" | "inactive" }>`
   display: inline-block;
   padding: ${({ theme }) => theme.spacing(1)} ${({ theme }) => theme.spacing(2)};
   border-radius: ${({ theme }) => theme.shape.borderRadius.md};
-  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   background-color: ${({ theme, $active }) =>
     $active === "active" ? theme.colors.success : theme.colors.divider};
   color: ${({ theme, $active }) =>
     $active === "active" ? theme.colors.common.white : theme.colors.text.primary};
-
-  @media ${({ theme }) => theme.mediaQuery.tablet} {
-    font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  }
 `;
 
 export const FiltersContainer = styled.div`
@@ -257,4 +243,11 @@ export const SortDirectionButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.primary.main};
   }
+`;
+
+export const CardsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(3)};
+  margin-top: ${({ theme }) => theme.spacing(4)};
 `;

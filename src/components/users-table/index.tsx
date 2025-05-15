@@ -12,19 +12,19 @@ import {
 import { useUsers } from "../../hooks/use-users";
 import * as S from "./styles";
 import { GetUsersDTO, UserDTO } from "../../services/user/DTO";
-import { useAuthContext } from "../../hooks/use-auth-context";
 import { EditUserModal } from "../modal/edit-user-modal";
 import { ConfirmModal } from "../modal/confirm-modal";
+import useMediaQuery from "../../hooks/use-media-query";
+import { theme } from "../../assets/styles/theme";
+import UserCard from "../user-card";
 
 const UsersTable = () => {
   const { users, pagination, isLoading, fetchUsers, updateUser, deleteUser } =
     useUsers();
-  const { isAdmin } = useAuthContext();
-
+  const isMobile = !useMediaQuery(theme.mediaQuery.tablet);
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "name", desc: false },
   ]);
-
   const [paginationState, setPaginationState] = React.useState<PaginationState>(
     {
       pageIndex: 0,
@@ -79,17 +79,16 @@ const UsersTable = () => {
     {
       id: "actions",
       header: "Ações",
-      cell: ({ row }) =>
-        isAdmin() && (
-          <S.ActionCell>
-            <S.EditButton onClick={() => setEditingUser(row.original)}>
-              Editar
-            </S.EditButton>
-            <S.DeleteButton onClick={() => setDeletingUserId(row.original.id)}>
-              Excluir
-            </S.DeleteButton>
-          </S.ActionCell>
-        ),
+      cell: ({ row }) => (
+        <S.ActionCell>
+          <S.EditButton onClick={() => setEditingUser(row.original)}>
+            Editar
+          </S.EditButton>
+          <S.DeleteButton onClick={() => setDeletingUserId(row.original.id)}>
+            Excluir
+          </S.DeleteButton>
+        </S.ActionCell>
+      ),
       enableSorting: false,
     },
   ];
@@ -222,67 +221,79 @@ const UsersTable = () => {
           </S.SortDirectionButton>
         </S.FilterGroup>
       </S.FiltersContainer>
+      {isMobile ? (
+        <S.CardsContainer>
+          {table.getRowModel().rows.map((row) => (
+            <UserCard
+              key={row.id}
+              user={row.original}
+              onEdit={() => setEditingUser(row.original)}
+              onDelete={() => setDeletingUserId(row.original.id)}
+            />
+          ))}
+        </S.CardsContainer>
+      ) : (
+        <S.TableContainer>
+          <S.Table>
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <S.TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <S.TableHead
+                      key={header.id}
+                      onClick={header.column.getToggleSortingHandler()}
+                    >
+                      <S.HeaderContent>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </S.HeaderContent>
+                    </S.TableHead>
+                  ))}
+                </S.TableRow>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <S.TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      <S.TableCellContainer>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </S.TableCellContainer>
+                    </td>
+                  ))}
+                </S.TableRow>
+              ))}
+            </tbody>
+          </S.Table>
 
-      <S.TableContainer>
-        <S.Table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <S.TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <S.TableHead
-                    key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}
-                  >
-                    <S.HeaderContent>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                    </S.HeaderContent>
-                  </S.TableHead>
-                ))}
-              </S.TableRow>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <S.TableRow key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    <S.TableCellContainer>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </S.TableCellContainer>
-                  </td>
-                ))}
-              </S.TableRow>
-            ))}
-          </tbody>
-        </S.Table>
+          <S.PaginationContainer>
+            <S.PaginationButton
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              Anterior
+            </S.PaginationButton>
 
-        <S.PaginationContainer>
-          <S.PaginationButton
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Anterior
-          </S.PaginationButton>
+            <S.PageInfo>
+              Página {paginationState.pageIndex + 1} de{" "}
+              {pagination?.totalPages || 1}
+            </S.PageInfo>
 
-          <S.PageInfo>
-            Página {paginationState.pageIndex + 1} de{" "}
-            {pagination?.totalPages || 1}
-          </S.PageInfo>
-
-          <S.PaginationButton
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Próxima
-          </S.PaginationButton>
-        </S.PaginationContainer>
-      </S.TableContainer>
+            <S.PaginationButton
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              Próxima
+            </S.PaginationButton>
+          </S.PaginationContainer>
+        </S.TableContainer>
+      )}
     </>
   );
 };
