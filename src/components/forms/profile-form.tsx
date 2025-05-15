@@ -11,7 +11,7 @@ import * as S from "./styles";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-type Props = {
+interface Props {
   user: {
     name: string;
     email: string;

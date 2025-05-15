@@ -23,7 +23,7 @@ type AuthContextType = {
   isAdmin: () => boolean;
 };
 
-type Props = {
+interface Props {
   children: React.ReactNode;
 };
 
