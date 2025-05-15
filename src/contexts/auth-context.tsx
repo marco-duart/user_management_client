@@ -25,7 +25,7 @@ type AuthContextType = {
 
 interface Props {
   children: React.ReactNode;
-};
+}
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -127,6 +127,11 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    cleanUser();
+    toast.success("Logout realizado com sucesso!");
+  };
+
   useEffect(() => {
     if (!state.user) {
       autoLogin();
@@ -140,7 +145,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         token: state.token,
         loading: state.loading,
         login,
-        logout: cleanUser,
+        logout,
         refreshUser,
         updateUser,
         isAdmin,
