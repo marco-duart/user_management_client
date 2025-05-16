@@ -6,6 +6,7 @@ import ProfilePage from "../pages/profile";
 import UsersPage from "../pages/users";
 import { PrivateRoute } from "../components/private-route";
 import { UserDTO } from "../services/user/DTO";
+import { GoogleCallbackPage } from "../pages/google-callback";
 
 const Router: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const Router: React.FC = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/google-callback" element={<GoogleCallbackPage />} />
         <Route
           element={
             <PrivateRoute

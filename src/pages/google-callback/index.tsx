@@ -17,7 +17,7 @@ export const GoogleCallbackPage: React.FC = () => {
         navigate("/profile");
       });
     } else {
-      navigate("/login");
+      navigate("/");
     }
   }, [searchParams, navigate, updateUser]);
 
