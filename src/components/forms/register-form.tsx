@@ -9,6 +9,7 @@ import { UserDTO } from "../../services/user/DTO";
 import * as S from "./styles";
 import LoadingSpinner from "../loading-spinner";
 import { useNavigate } from "react-router-dom";
+import { GoogleAuthButton } from "../google-login-button";
 
 const RegisterForm: React.FC = () => {
   const { registerUser, loading, error } = useRegistration();
@@ -85,6 +86,11 @@ const RegisterForm: React.FC = () => {
         <S.SubmitButton type="submit" disabled={loading}>
           {loading ? "Criando conta..." : "Criar conta"}
         </S.SubmitButton>
+
+        <S.Divider>
+          <span>ou</span>
+        </S.Divider>
+        <GoogleAuthButton />
       </S.Form>
     </>
   );

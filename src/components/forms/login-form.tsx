@@ -4,6 +4,7 @@ import { useAuthContext } from "../../hooks/use-auth-context";
 import { LoginFormData, loginResolver } from "../../schemas/login-schema";
 import * as S from "./styles";
 import LoadingSpinner from "../loading-spinner";
+import { GoogleAuthButton } from "../google-login-button";
 
 const LoginForm: React.FC = () => {
   const { login, loading: authLoading } = useAuthContext();
@@ -79,6 +80,10 @@ const LoginForm: React.FC = () => {
         <S.SubmitButton type="submit" disabled={isLoading}>
           {isLoading ? "Entrando..." : "Entrar"}
         </S.SubmitButton>
+        <S.Divider>
+          <span>ou</span>
+        </S.Divider>
+        <GoogleAuthButton />
       </S.Form>
     </>
   );

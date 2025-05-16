@@ -248,3 +248,26 @@ export const LoadingOverlay = styled.div`
   justify-content: center;
   z-index: 1000;
 `;
+
+export const Divider = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
+  }
+
+  &::before {
+    margin-right: 16px;
+  }
+
+  &::after {
+    margin-left: 16px;
+  }
+`;
