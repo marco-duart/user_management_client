@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { UserDTO } from "../services/user/DTO";
-import { LoginService, MeService } from "../services/auth/index";
+import { GoogleAuthService, LoginService, MeService } from "../services/auth/index";
 import { env } from "../config/env";
 
 type AuthUser = UserDTO.Model;
@@ -17,6 +17,7 @@ type AuthContextType = {
   token: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
+  loginWithGoogle: () => Promise<void>;
   logout: () => void;
   refreshUser: () => Promise<void>;
   updateUser: (user: AuthUser, token: string) => void;
@@ -32,6 +33,7 @@ export const AuthContext = createContext<AuthContextType>({
   token: null,
   loading: false,
   login: async () => false,
+  loginWithGoogle: async () => {},
   logout: () => {},
   refreshUser: async () => {},
   updateUser: () => {},
@@ -127,6 +129,10 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     }
   };
 
+  const loginWithGoogle = async () => {
+    GoogleAuthService.redirectToGoogleAuth();
+  };
+
   const logout = () => {
     cleanUser();
     toast.success("Logout realizado com sucesso!");
@@ -145,6 +151,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         token: state.token,
         loading: state.loading,
         login,
+        loginWithGoogle,
         logout,
         refreshUser,
         updateUser,

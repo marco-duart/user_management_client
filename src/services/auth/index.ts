@@ -1,6 +1,7 @@
 import { isAxiosError } from "axios";
 import api from "../../config/api";
 import { LoginDTO, RegistrationDTO, MeDTO } from "./DTO";
+import { env } from "../../config/env";
 
 export const LoginService = async (params: LoginDTO.Params) => {
   try {
@@ -100,4 +101,19 @@ export const MeService = async (params: MeDTO.Params) => {
       code: 500,
     };
   }
+};
+
+export const GoogleAuthService = {
+  redirectToGoogleAuth: () => {
+    window.location.href = `${env.BASE_URL}/auth/google`;
+  },
+
+  handleCallback: async (token: string) => {
+    try {
+      localStorage.setItem(env.LOCALSTORAGE_TOKEN_KEY, token);
+      return { success: true, token };
+    } catch (error) {
+      return { success: false, error: "Falha ao processar o acesso via Google" };
+    }
+  },
 };
