@@ -115,11 +115,9 @@ Forms: Implementados com react hook form e zod. Possuem validações dos campos
 
 Toasts para feedback visual
 
-## **Deploy**
-`Endpoint Base`  
-http://34.31.28.30:3001/api/v1  
-`Swagger Docs`  
-http://34.31.28.30:3001/api/v1/docs  
+## **Deploy**  
+`Aplicação`  
+http://34.31.28.30:5173   
 
 ### Problema no OAuth
 - **Erro 400** do Google: bloqueia IPs brutos (`34.31.28.30`)  
