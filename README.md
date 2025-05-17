@@ -1,55 +1,119 @@
-# React + TypeScript + Vite
+# User Management Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Requisitos Iniciais
 
-Currently, two official plugins are available:
+Antes de começar, certifique-se de ter instalado:
+- Node.js (versão 18 ou 19)
+- npm ou yarn
+- Git
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Configuração do Projeto
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clone o repositório:
+```
+git clone https://github.com/marco-duart/user_management_client.git
+cd nome-do-projeto
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Instale as dependências:
 ```
-# user_management_client
+npm install
+```
+
+3. Configure as variáveis de ambiente:
+- Crie um arquivo `.env` na raiz baseado no `.env.example`
+- Defina `VITE_BASE_URL` com a URL da sua API backend
+
+4. Execute a aplicação:
+```
+npm run dev
+```
+
+## Estrutura do Projeto
+src/
+├── assets/ # Recursos estáticos e estilos globais
+├── components/ # Componentes reutilizáveis
+├── config/ # Configurações da aplicação
+├── contexts/ # Contextos React
+├── hooks/ # Hooks customizados
+├── pages/ # Componentes de página
+├── routes/ # Configuração de rotas
+├── schemas/ # Esquemas de validação
+└── services/ # Chamadas à API
+
+
+## Principais Funcionalidades
+
+### Autenticação
+- Login com email/senha
+- Login com Google OAuth
+- Registro de novos usuários
+- Proteção de rotas privadas
+- Controle de acesso por roles (user/admin)
+
+### Gerenciamento de Usuários
+- Perfil do usuário logado
+- Listagem de usuários (apenas admin)
+- Controle de sessão e token JWT
+
+## Decisões de Arquitetura
+
+### 1. Gerenciamento de Estado
+- **Auth Context**: Contexto global para estado de autenticação
+- **Hooks Customizados**: Como `useAuthContext` para acesso facilitado
+- **Local Storage**: Armazenamento seguro do token JWT
+
+### 2. Roteamento
+- **Rotas Privadas**: Componente `PrivateRoute` para proteção
+- **Layout Base**: Componente `BaseLayout` para estrutura comum (header e outlet)
+
+### 3. Estilização
+- **Styled Components**: Para estilos
+- **Tema Global**: Cores, tipografia e espaçamentos padronizados
+- **Responsividade**: Media queries para diferentes tamanhos de tela
+
+### 4. Formulários
+- **React Hook Form**: Para gerenciamento eficiente
+- **Zod**: Para validação de schemas
+
+### 5. Integração com API
+- **Serviços Organizados**: Separação por domínio (auth, user)
+- **Axios**: Para requisições HTTP
+
+## Bibliotecas Principais
+- React + Vite
+- React Router DOM
+- Styled Components
+- Styled Icons
+- Axios
+- React Hook Form + Zod
+- React Hot Toast
+- Tanstack React Table
+- Qs
+
+## Variáveis de Ambiente
+| Variável                    | Descrição                  | Exemplo                      |
+|-----------------------------|----------------------------|------------------------------|
+| VITE_BASE_URL               | URL base da API            | http://localhost:3001/api/v1 |
+| VITE_LOCALSTORAGE_TOKEN_KEY | Chave para armazenar token | user-management-token        |
+
+## Detalhes Adicionais de Implementação
+### 1. Fluxo de Autenticação:
+
+O token JWT é armazenado no localStorage com chave configurável
+Todas as requisições subsequentes incluem o token no header
+Rotas protegidas verificam autenticação e permissões
+
+### 2. Principais Componentes:
+
+PrivateRoute: Controla acesso a rotas
+GoogleLoginButton: Botão estilizado para login com Google
+UserTable: Exibe lista de usuários com paginação. Renderiza cards na versão mobile
+Forms: Implementados com react hook form e zod. Possuem validações dos campos
+
+### 3. Tratamento de Erros:
+
+Toasts para feedback visual
+
+## Licença
+Apache License Version 2.0
