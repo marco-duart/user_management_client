@@ -30,16 +30,16 @@ npm run dev
 ```
 
 ## Estrutura do Projeto
-src/
-├── assets/ # Recursos estáticos e estilos globais
-├── components/ # Componentes reutilizáveis
-├── config/ # Configurações da aplicação
-├── contexts/ # Contextos React
-├── hooks/ # Hooks customizados
-├── pages/ # Componentes de página
-├── routes/ # Configuração de rotas
-├── schemas/ # Esquemas de validação
-└── services/ # Chamadas à API
+src/  
+├── assets/ # Recursos estáticos e estilos globais  
+├── components/ # Componentes reutilizáveis  
+├── config/ # Configurações da aplicação  
+├── contexts/ # Contextos React  
+├── hooks/ # Hooks customizados  
+├── pages/ # Componentes de página  
+├── routes/ # Configuração de rotas  
+├── schemas/ # Esquemas de validação  
+└── services/ # Chamadas à API  
 
 
 ## Principais Funcionalidades
